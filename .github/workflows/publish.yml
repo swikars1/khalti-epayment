@@ -24,3 +24,6 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: pnpm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.AGITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.ANPM_TOKEN }}
