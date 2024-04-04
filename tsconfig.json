@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2016", // js version
+    "module": "commonjs", // what type of module code to generate
+    "esModuleInterop": true, // emits additional js for diff type of modules
+    "forceConsistentCasingInFileNames": true, //checks casing
+    "strict": true, // strict
+    "skipLibCheck": true, // dont check .d.ts files
+    "noUncheckedIndexedAccess": true, //tight ts rules
+    "noEmit": true // ts as linter
+  }
+}
