@@ -33,4 +33,4 @@ jobs:
         # You can do something when a publish should happen.
         run: pnpm publish
         env:
-          NPM_TOKEN: ${{ secrets.ANPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.ANPM_TOKEN }}
