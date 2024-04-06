@@ -20,6 +20,3 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint && pnpm run build
-        env:
-          GITHUB_TOKEN: ${{ secrets.AGITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.ANPM_TOKEN }}
