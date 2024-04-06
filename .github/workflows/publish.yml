@@ -28,4 +28,9 @@ jobs:
           publish: pnpm run build
         env:
           GITHUB_TOKEN: ${{ secrets.AGITHUB_TOKEN }}
+      - name: Publish to NPM
+        if: steps.changesets.outputs.hasChangesets == 'false'
+        # You can do something when a publish should happen.
+        run: pnpm publish
+        env:
           NPM_TOKEN: ${{ secrets.ANPM_TOKEN }}
