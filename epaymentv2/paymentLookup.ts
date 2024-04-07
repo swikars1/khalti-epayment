@@ -21,15 +21,12 @@ export interface PaymentLookupRequest {
 /**
  * Represents the base structure of a successful lookup API response.
  */
-export interface PaymentLookupSuccessResponse {
+interface PaymentLookupGeneralResponse {
   /** The initial payment identifier. */
   pidx: string;
 
   /** The total amount of the transaction (in what currency? Assuming Paisa here). */
   total_amount: number;
-
-  /** The current status of the transaction. */
-  status: PaymentStatus;
 
   /** The unique transaction identifier assigned by Khalti. */
   transaction_id: string | null;
@@ -39,13 +36,24 @@ export interface PaymentLookupSuccessResponse {
 
   /** Indicates whether the transaction has been refunded. */
   refunded: boolean;
+
+  /** The current status of the transaction. */
+  status: PaymentStatus;
+}
+
+/**
+ * Represents a specific lookup response for a 'Success' transaction.
+ */
+export interface PaymentLookupSuccessResponse
+  extends PaymentLookupGeneralResponse {
+  status: "Completed"; // Enforce the specific status
 }
 
 /**
  * Represents a specific lookup response for a 'Pending' transaction.
  */
 export interface PaymentLookupPendingResponse
-  extends PaymentLookupSuccessResponse {
+  extends PaymentLookupGeneralResponse {
   status: "Pending"; // Enforce the specific status
   transaction_id: null; // Transaction ID not yet generated
 }
@@ -54,7 +62,7 @@ export interface PaymentLookupPendingResponse
  * Represents a specific lookup response for an 'Initiated' transaction.
  */
 export interface PaymentLookupInitiatedResponse
-  extends PaymentLookupSuccessResponse {
+  extends PaymentLookupGeneralResponse {
   status: "Initiated";
 }
 
@@ -62,7 +70,7 @@ export interface PaymentLookupInitiatedResponse
  * Represents a specific lookup response for a 'Refunded' transaction.
  */
 export interface PaymentLookupRefundedResponse
-  extends PaymentLookupSuccessResponse {
+  extends PaymentLookupGeneralResponse {
   status: "Refunded";
   refunded: true;
 }
@@ -71,7 +79,7 @@ export interface PaymentLookupRefundedResponse
  * Represents a specific lookup response for an 'Expired' transaction.
  */
 export interface PaymentLookupExpiredResponse
-  extends PaymentLookupSuccessResponse {
+  extends PaymentLookupGeneralResponse {
   status: "Expired";
   transaction_id: null;
 }
@@ -80,12 +88,13 @@ export interface PaymentLookupExpiredResponse
  * Represents a specific lookup response for a 'UserCanceled' transaction.
  */
 export interface PaymentLookupCanceledResponse
-  extends PaymentLookupSuccessResponse {
+  extends PaymentLookupGeneralResponse {
   status: "UserCanceled";
   transaction_id: null;
 }
 
 export type AllLookupResponse =
+  | PaymentLookupSuccessResponse
   | PaymentLookupPendingResponse
   | PaymentLookupInitiatedResponse
   | PaymentLookupRefundedResponse
