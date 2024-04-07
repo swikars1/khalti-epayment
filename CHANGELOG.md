@@ -1,5 +1,11 @@
 # khalti-epayment
 
+## 0.0.6
+
+### Patch Changes
+
+- f4f8a9f: test changeset
+
 ## 0.0.5
 
 ### Patch Changes
