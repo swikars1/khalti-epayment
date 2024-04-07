@@ -1,5 +1,11 @@
 # khalti-epayment
 
+## 0.1.1
+
+### Patch Changes
+
+- 29c9702: add builders
+
 ## 0.1.0
 
 ### Minor Changes
