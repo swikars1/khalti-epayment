@@ -1,5 +1,11 @@
 # khalti-epayment
 
+## 0.1.0
+
+### Minor Changes
+
+- 2db5b55: add khalti api calls
+
 ## 0.0.6
 
 ### Patch Changes
