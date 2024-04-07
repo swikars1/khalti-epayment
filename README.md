@@ -8,8 +8,6 @@ This library provides a convenient way to integrate Khalti e-Payments into your 
 npm install khalti-epayment
 ```
 
-**Use code with caution.**
-
 ## Usage
 
 ```javascript
