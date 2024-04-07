@@ -1,5 +1,11 @@
 # khalti-epayment
 
+## 0.1.2
+
+### Patch Changes
+
+- 491162f: jsdoc
+
 ## 0.1.1
 
 ### Patch Changes
