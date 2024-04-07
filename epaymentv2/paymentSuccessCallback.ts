@@ -1,7 +1,7 @@
 /**
  * Represents the data received in the redirect callback URL after a payment attempt.
  */
-interface PaymentRedirectResponse {
+export interface PaymentRedirectResponse {
   /** The initial payment identifier provided during initiation. */
   pidx: string;
 
