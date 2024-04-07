@@ -8,6 +8,15 @@ import type {
   PaymentLookupRequest,
 } from "./epaymentv2/paymentLookup";
 
+/**
+ * Wraps a Promise in a try/catch block, returning a tuple for robust error handling.
+ *
+ * @template T - The expected data type of the resolved Promise.
+ * @param promise - The Promise to be wrapped.
+ * @returns A tuple of `[data, error]` where:
+ *    - `data` is the resolved data of the Promise (or null on error).
+ *    - `error` is the error object if the Promise rejected (or null on success).
+ */
 async function awTry<T>(promise: unknown) {
   try {
     const data = await promise;
@@ -18,6 +27,12 @@ async function awTry<T>(promise: unknown) {
   }
 }
 
+/**
+ * Handles payment lookups using an Axios instance.
+ *
+ * @param instance - A configured Axios instance.
+ * @returns A function to perform payment lookups.
+ */
 const paymentLookup = (instance: AxiosInstance) => {
   return async ({ pidx }: PaymentLookupRequest) => {
     const [response, error] = await awTry<{ data: AllLookupResponse }>(
@@ -30,6 +45,12 @@ const paymentLookup = (instance: AxiosInstance) => {
   };
 };
 
+/**
+ * Handles payment initiation using an Axios instance.
+ *
+ * @param instance - A configured Axios instance.
+ * @returns A function to initiate payments.
+ */
 const initiatePayment = (instance: AxiosInstance) => {
   return async (payload: InitiatePaymentRequest) => {
     const [response, error] = await awTry<{ data: InitiatePaymentResponse }>(
@@ -43,6 +64,13 @@ const initiatePayment = (instance: AxiosInstance) => {
   };
 };
 
+/**
+ * Creates a configured Khalti instance for handling payments.
+ *
+ * @param env - The environment to use (`sandbox` or `production`).
+ * @param secretKey - The Khalti live secret key.
+ * @returns An object with `paymentLookup` and `initiatePayment` functions bound to the instance.
+ */
 export const createKhaltiInstance = ({
   env,
   secretKey,
