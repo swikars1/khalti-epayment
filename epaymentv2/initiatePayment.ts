@@ -1,41 +1,7 @@
-import { khaltiInstanceServer } from "./khaltiInstanceServer";
-import { awTry } from "./utils";
-
-/**
- * Represents the successful response when initiating a payment.
- */
-interface InitiatePaymentResponse {
-  /**
-   * A unique request identifier provided upon success. Use this 'pidx'
-   * for future references to this payment.
-   */
-  pidx: string;
-
-  /** The URL to redirect the user to in order to complete the payment. */
-  payment_url: string;
-
-  /** Date and time (likely in ISO format) when the payment link expires. */
-  expires_at: string;
-
-  /** Number of seconds until the payment link expires. */
-  expires_in: number;
-}
-
-/**
- * Represents an error response when initiating a payment.
- */
-interface InitiatePaymentError {
-  /** The return URL that was likely invalid or problematic. */
-  return_url: string[];
-
-  /** A fixed error key indicating a validation issue. */
-  error_key: "validation_error";
-}
-
 /**
  * Represents the request payload for initiating a payment.
  */
-interface InitiatePaymentRequest {
+export interface InitiatePaymentRequest {
   /** URL where the user will be redirected after completing the transaction */
   return_url: string;
 
@@ -59,12 +25,15 @@ interface InitiatePaymentRequest {
 
   /** Details about the products or services included in the transaction (optional) */
   product_details?: ProductDetail[];
+
+  /** Additional merchant-specific information (optional) merchant_info?: MerchantInfo; */
+  [key: `merchant_${string}`]: any;
 }
 
 /**
  * Contains customer information for billing purposes.
  */
-interface CustomerInfo {
+export interface CustomerInfo {
   /** Customer's full name */
   name: string;
 
@@ -78,7 +47,7 @@ interface CustomerInfo {
 /**
  * Represents a single charge item within the amount breakdown.
  */
-interface AmountBreakdownItem {
+export interface AmountBreakdownItem {
   /** Description of a particular charge within the total amount */
   label: string;
 
@@ -89,7 +58,7 @@ interface AmountBreakdownItem {
 /**
  * Holds information about a product included in the transaction.
  */
-interface ProductDetail {
+export interface ProductDetail {
   /** Unique identifier for the product */
   identity: string;
 
@@ -106,14 +75,45 @@ interface ProductDetail {
   unit_price: number;
 }
 
-const initiatePayment = async (payload: InitiatePaymentRequest) => {
-  const [response, error] = await awTry<{ data: InitiatePaymentResponse }>(
-    khaltiInstanceServer.post("/epayment/initiate/", payload)
-  );
-  if (error) {
-    console.log("Error, in initiatePayment: ", error);
-  }
-  return response.data;
-};
+/**
+ * Represents the successful response when initiating a payment.
+ */
+export interface InitiatePaymentResponse {
+  /**
+   * A unique request identifier provided upon success. Use this 'pidx'
+   * for future references to this payment.
+   */
+  pidx: string;
 
-export { initiatePayment };
+  /** The URL to redirect the user to in order to complete the payment. */
+  payment_url: string;
+
+  /** Date and time (likely in ISO format) when the payment link expires. */
+  expires_at: string;
+
+  /** Number of seconds until the payment link expires. */
+  expires_in: number;
+
+  /** Additional merchant-specific information (optional) merchant_info?: MerchantInfo; */
+  [key: `merchant_${string}`]: any;
+}
+
+/**
+ * Represents an error response when initiating a payment.
+ */
+export interface InitiatePaymentError {
+  /** The return URL that was likely invalid or problematic. */
+  return_url: string[];
+
+  /** A fixed error key indicating a validation issue. */
+  error_key: "validation_error";
+}
+
+// initiatePayment({
+//   merchant_asd: 1,
+//   amount: 12,
+//   purchase_order_id: "1",
+//   return_url: "asd",
+//   website_url: "sad",
+//   purchase_order_name: "asd",
+// })
