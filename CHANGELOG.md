@@ -1,5 +1,11 @@
 # khalti-epayment
 
+## 0.1.3
+
+### Patch Changes
+
+- 0bb25e8: update hoempage
+
 ## 0.1.2
 
 ### Patch Changes
