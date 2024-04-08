@@ -20,39 +20,37 @@ const khalti = createKhaltiInstance({
 
 // Initiate a payment
 const initiateResponse = await khalti.initiatePayment({
-  {
-    return_url: "https://example.com/payment/",
-    website_url: "https://example.com/",
-    amount: 1300,
-    purchase_order_id: "test12",
-    purchase_order_name: "test",
-    customer_info: {
-      name: "Khalti Bahadur",
-      email: "example@gmail.com",
-      phone: "9800000123",
+  return_url: "https://example.com/payment/",
+  website_url: "https://example.com/",
+  amount: 1300,
+  purchase_order_id: "test12",
+  purchase_order_name: "test",
+  customer_info: {
+    name: "Khalti Bahadur",
+    email: "example@gmail.com",
+    phone: "9800000123",
+  },
+  amount_breakdown: [
+    {
+      label: "Mark Price",
+      amount: 1000,
     },
-    amount_breakdown: [
-      {
-        label: "Mark Price",
-        amount: 1000,
-      },
-      {
-        label: "VAT",
-        amount: 300,
-      },
-    ],
-    product_details: [
-      {
-        identity: "1234567890",
-        name: "Khalti logo",
-        total_price: 1300,
-        quantity: 1,
-        unit_price: 1300,
-      },
-    ],
-    merchant_username: "merchant_name",
-    merchant_extra: "merchant_extra",
-  }
+    {
+      label: "VAT",
+      amount: 300,
+    },
+  ],
+  product_details: [
+    {
+      identity: "1234567890",
+      name: "Khalti logo",
+      total_price: 1300,
+      quantity: 1,
+      unit_price: 1300,
+    },
+  ],
+  merchant_username: "merchant_name",
+  merchant_extra: "merchant_extra",
 });
 
 // Lookup payment status
