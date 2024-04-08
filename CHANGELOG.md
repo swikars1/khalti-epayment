@@ -1,5 +1,11 @@
 # khalti-epayment
 
+## 0.1.5
+
+### Patch Changes
+
+- c1af0d4: modify comment
+
 ## 0.1.4
 
 ### Patch Changes
