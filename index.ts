@@ -65,7 +65,7 @@ const initiatePayment = (instance: AxiosInstance) => {
 };
 
 /**
- * Creates a configured Khalti instance for handling payments.
+ * Creates a configured Khalti instance for handling payments for us.
  *
  * @param env - The environment to use (`sandbox` or `production`).
  * @param secretKey - The Khalti live secret key.
