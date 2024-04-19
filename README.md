@@ -1,6 +1,6 @@
 # Khalti e-Payment Checkout Library
 
-This library provides a convenient way to integrate Khalti e-Payments into your web applications.
+This library provides a convenient way to integrate Khalti e-Payments.
 
 ## Installation
 
